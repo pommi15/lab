@@ -1,30 +1,18 @@
-# Makefile for fightclub
+# Makefile for lab
 # Thomas Rauhofer and Tobias Watzek
-# OOOO
+# d[ o_0 ]b
 
 CC=g++
 CFLAGS=-g -Wall -std=c++11
 
 all: fightclub
 
-fightclub: fightclub.o fighter.o doctor.o warrior.o ninja.o lemming.o game.o
-	${CC} ${CFLAGS} fightclub.o fighter.o  doctor.o warrior.o ninja.o lemming.o game.o -o fightclub
+fightclub: lab.o
+	${CC} ${CFLAGS} lab.o -o lab
 
-fightclub.o: fightclub.cpp
-	${CC} ${CFLAGS} -c fightclub.cpp -o fightclub.o
-fighter.o: fighter.cpp
-	${CC} ${CFLAGS} -c fighter.cpp -o fighter.o
-doctor.o: doctor.cpp
-	${CC} ${CFLAGS} -c doctor.cpp -o doctor.o
-lemming.o: lemming.cpp
-	${CC} ${CFLAGS} -c lemming.cpp -o lemming.o
-warrior.o: warrior.cpp
-	${CC} ${CFLAGS} -c warrior.cpp -o warrior.o
-ninja.o: ninja.cpp
-	${CC} ${CFLAGS} -c ninja.cpp -o ninja.o
-game.o: game.cpp
-	${CC} ${CFLAGS} -c game.cpp -o game.o
+lab.o: lab.cpp
+	${CC} ${CFLAGS} -c lab.cpp -o lab.o
 
 .PHONY: clean
 clean:
-	rm -f *.o fightclub
+	rm -f *.o lab
