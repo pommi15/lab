@@ -9,8 +9,16 @@
  *        if15b038       *
  *************************/
 
+#include <iostream>
+#include <memory>
 
-int main() {
+#include "import.h"
+
+int main(int argc, char* argv[]) {
+  auto import = std::make_shared<Import>(argv[1]);
+  for (auto i : import->input_vector) {
+    std::cout << i << std::endl;
+  }
 
   return 0;
 }
