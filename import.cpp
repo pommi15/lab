@@ -16,14 +16,14 @@
 
  #include "import.h"
 
- using namespace std;
+
 
  /* constructor */
 Import::Import(std::string filepath) {
   this->filepath = filepath;
-  ifstream input(this->filepath.c_str());               // open the file
-  string line;                            // temp variable
-  while (getline(input, line)) {          // read lines as long as the file is
+  std::ifstream input(this->filepath.c_str());               // open the file
+  std::string line;                            // temp variable
+  while (std::getline(input, line)) {          // read lines as long as the file is
     this->input_vector.push_back(line);   // save the line to the vector
   }
 }

@@ -8,19 +8,17 @@
  *     Tobias WATZEK     *
  *        if15b038       *
  *************************/
- #include <string>
- #include <iostream>
- #include <vector>
- #include <memory>
 
- #include "import.h"
+#include <string>
+#include <iostream>
+#include <vector>
+#include <fstream>
 
-
-int main(int argc, char* argv[]) {
-  auto import = std::make_shared<Import>(argv[1]);
-  for (auto i : import->input_vector) {
-    std::cout << i << std::endl;
+Labyrinth::Labyrinth(std::vector<std::string> walls){
+  for(auto i : walls){
+    for(char& c : i){
+      
+    }
   }
 
-  return 0;
 }
