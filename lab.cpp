@@ -8,9 +8,20 @@
  *     Tobias WATZEK     *
  *        if15b038       *
  *************************/
+ #include <string>
+ #include <iostream>
+ #include <vector>
+ #include <memory>
 
+ #include "import.h"
 
-int main() {
+ using namespace std;
+
+int main(int argc, char* argv[]) {
+  auto import = make_shared<Import>(argv[1]);
+  for (auto i : import->input_vector) {
+    cout << i << endl;
+  }
 
   return 0;
 }
