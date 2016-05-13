@@ -17,32 +17,43 @@
 #include "labyrinth.h"
 
 Labyrinth::Labyrinth(std::vector<std::string> walls){
-  int height = walls.size();
-  int width = walls[1].size();
+  int height = walls.size() - 1;
+  int width = walls[1].size() - 1;
+  int tmp_height = 0;
+  int tmp_width = 0;
 
-  std::vector<std::vector<bool>> tmp(height + 1);
+  std::vector< std::vector< bool > > maze(height);
   /** Loop trough the rows of the tmp vector */
-  for (auto& row : tmp) {
-    /**
-    * Create a tmp row with the entered width plus one
-    * for the numbering and fill with dots
-    */
-    std::vector<bool> tmp_row(width , " ");
+  for (auto& row : maze) {
+    std::vector<bool> tmp_row(width);
+    for(auto c : walls[tmp_height]){
+      if(c == '#'){
+        tmp_row[tmp_width] == false;
+        std::cout << "#";
+      }else{
+        tmp_row[tmp_width] == true;
+        std::cout << " ";
+      }
+      tmp_width++;
+    }
+    std::cout << std::endl;
+    tmp_height++;
     /** replace the row with the tmp row */
     row.swap(tmp_row);
   }
-  this->maze.swap(tmp);
-  int temp_height = 0;
-  int temp_width = 0;
-  for (auto i : walls){
-    for (char& c : i){
-      if(c == '#'){
-        maze[temp_width][temp_height] = false;
+  this->maze.swap(maze);
+}
+void Labyrinth::print_maze(){
+  for (auto y : this->maze){
+    for (auto x : y){
+      std::cout << x;
+      if(x){
+        std::cout << "*";
       }else{
-        maze[temp_width][temp_height] = true;
+        std::cout << "#";
       }
-      temp_height++;
     }
-    temp_width++;
+    std::cout << std::endl;
   }
+
 }

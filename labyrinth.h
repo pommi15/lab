@@ -8,8 +8,7 @@
  *     Tobias WATZEK     *
  *        if15b038       *
  *************************/
-#ifndef LABYRINTH_H_
-#define LABYRINTH_H_
+#pragma once
 #include <string>
 #include <iostream>
 #include <vector>
@@ -20,5 +19,5 @@ public:
   Labyrinth(std::vector<std::string> walls);
 
   std::vector<std::vector<bool>> maze;
+  void print_maze();
 };
-#endif  // LABYRINTH_H_
