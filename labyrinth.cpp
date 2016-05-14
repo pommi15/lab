@@ -46,9 +46,9 @@ void Labyrinth::print_maze(){
   for (auto y : this->maze){
     for (auto x : y){
       if(x){
-        std::cout << "*";
-      }else{
         std::cout << "#";
+      }else{
+        std::cout << "+";
       }
     }
     std::cout << std::endl;

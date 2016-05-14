@@ -17,7 +17,8 @@
 class Labyrinth {
 public:
   Labyrinth(std::vector<std::string> walls);
-
-  std::vector<std::vector<bool>> maze;
   void print_maze();
+private:
+  std::vector<std::vector<bool>> maze;
+
 };
