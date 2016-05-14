@@ -7,8 +7,8 @@ CFLAGS=-g -Wall -std=c++11
 
 all: lab
 
-lab: lab.o bot.o import.o labyrinth.o
-	${CC} ${CFLAGS} lab.o import.o bot.o labyrinth.o -o lab
+lab: lab.o bot.o import.o labyrinth.o namegen.o
+	${CC} ${CFLAGS} lab.o import.o bot.o labyrinth.o namegen.o -o lab
 
 lab.o: lab.cpp
 	${CC} ${CFLAGS} -c lab.cpp -o lab.o
@@ -21,6 +21,9 @@ impot.o: import.cpp
 
 labyrinth.o: labyrinth.cpp
 	${CC} ${CFLAGS} -c labyrinth.cpp -o labyrinth.o
+
+namegen.o: namegen.cpp
+	${CC} ${CFLAGS} -c namegen.cpp -o namegen.o
 
 .PHONY: clean
 clean:
