@@ -15,6 +15,7 @@
 #include <fstream>
 
 #include "labyrinth.h"
+#include "position.h"
 
 Labyrinth::Labyrinth(std::vector<std::string> walls){
   int height = walls.size() - 1;
@@ -53,15 +54,5 @@ void Labyrinth::print_maze(){
     }
     std::cout << std::endl;
   }
-
-}
-/*
-Wunschliste für maze Klasse:
-- bool is_wall(position) -> liefert bool zurück ob die Position eine Wand ist
-- position get_entry() -> liefert position mit eingang zurück
-- position get_exit() -> liefert position mit ausgang zurück
-*/
-bool Labyrinth::is_wall(position){
-  if(this->maze[position.y][position.x])
 
 }
