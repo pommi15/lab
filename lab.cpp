@@ -17,10 +17,6 @@
 
 int main(int argc, char* argv[]) {
   auto import = std::make_shared<Import>(argv[1]);
-  for (auto i : import->input_vector) {
-    std::cout << i << std::endl;
-  }
-
   auto laby = std::make_shared<Labyrinth>(import->input_vector);
   laby->print_maze();
 
