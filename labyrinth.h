@@ -19,13 +19,13 @@ class Labyrinth {
 public:
   Labyrinth(const std::vector<std::string> &walls);
   void print_maze();
-  position entry;
-  position exit;
   position get_entry();
   position get_exit();
   bool is_wall(position position);
 private:
   void find_entry_and_exit();
+  position entry;
+  position exit;
   bool entry_set;
   bool exit_set;
   std::vector<std::vector<bool>> maze;
