@@ -9,21 +9,20 @@
  *        if15b038       *
  *************************/
 
- #include <string>
- #include <iostream>
- #include <vector>
- #include <fstream>
+#include <string>
+#include <iostream>
+#include <vector>
+#include <fstream>
 
- #include "import.h"
+#include "import.h"
 
 
-
- /* constructor */
+/* constructor */
 Import::Import(std::string filepath) {
   this->filepath = filepath;
-  std::ifstream input(this->filepath.c_str());               // open the file
-  std::string line;                            // temp variable
-  while (std::getline(input, line)) {          // read lines as long as the file is
-    this->input_vector.push_back(line);   // save the line to the vector
+  std::ifstream input(this->filepath.c_str());  // open the file
+  std::string line;                             // temp variable
+  while (getline(input, line)) {           // read lines as long as the file is
+    this->input_vector.push_back(line);    // save the line to the vector
   }
 }
