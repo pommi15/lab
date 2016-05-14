@@ -9,15 +9,11 @@
  *        if15b038       *
  *************************/
 #pragma once
-#include <string>
-#include <iostream>
-#include <vector>
-#include <fstream>
 
-class Import {
- public:
-  Import(std::string filepath);  // constructor
-  std::vector<std::string> input_vector;  // vector for the read in numbers
-  std::string filepath;
+enum direction
+{
+  NORTH,
+  EAST,
+  SOUTH,
+  WEST
 };
-

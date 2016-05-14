@@ -17,42 +17,52 @@
 #include "labyrinth.h"
 #include "position.h"
 
-Labyrinth::Labyrinth(std::vector<std::string> walls){
-  int height = walls.size() - 1;
-  int width = walls[1].size() - 1;
+/**
+ * Constructor
+ */
+Labyrinth::Labyrinth(const std::vector<std::string>& walls) {
+  /** Height of the maze */
+  this->height = walls.size();
+  /** width of the maze */
+  this->width = walls[0].size() - 1;
+  /** create a tmp maze */
+  std::vector<std::vector<bool>> tmp_maze(this->height);
 
-  int tmp_height = 0;
-  int tmp_width = 0;
+  /**
+   * Loop through the rows
+   */
+  for (int y = 0; y < this->height; ++y) {
+    std::vector<bool> tmp_row(this->width, true);
 
-  std::vector< std::vector< bool > > maze(height);
-  /** Loop trough the rows of the tmp vector */
-  for (auto& row : maze) {
-    std::vector< bool > tmp_row(width);
-    for(auto c : walls[tmp_height]){
-      if(c == '#'){
-        tmp_row[tmp_width] == false;
-      }else{
-        tmp_row[tmp_width] == true;
+    if (walls[y].size() > 2) {
+      for (int x = 0; x < this->width; ++x) {
+        if (walls[y][x] == '#') {
+          tmp_row[x] = false;
+        } else if (walls[y][x] == ' ') {
+          tmp_row[x] = true;
+        }
       }
-      tmp_width++;
+      tmp_maze[y].swap(tmp_row);
+    } else {
+      if (y == (this->height - 1)) {
+        --this->height;
+        tmp_maze.pop_back();
+      }
     }
-    tmp_height++;
-    /* replace the row with the tmp row */
-    row.swap(tmp_row);
   }
-  this->maze.swap(maze);
+  this->maze.swap(tmp_maze);
 }
 
-void Labyrinth::print_maze(){
-  for (auto y : this->maze){
-    for (auto x : y){
-      if(x){
-        std::cout << "#";
-      }else{
+
+void Labyrinth::print_maze() {
+  for (auto row : this->maze) {
+    for (auto cell : row) {
+      if (cell) {
+        std::cout << " ";
+      } else {
         std::cout << "+";
       }
     }
     std::cout << std::endl;
   }
-
 }
