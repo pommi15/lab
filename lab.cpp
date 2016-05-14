@@ -11,14 +11,19 @@
 
 #include <iostream>
 #include <memory>
+#include <string>
 
 #include "import.h"
 #include "labyrinth.h"
+#include "namegen.h"
 
 int main(int argc, char* argv[]) {
-  auto import = std::make_shared<Import>(argv[1]);
-  auto laby = std::make_shared<Labyrinth>(import->input_vector);
+  std::string filepath = argv[1];
+  auto import = std::make_shared<Import>();
+  auto converted = import->convert(filepath);
+  auto laby = std::make_shared<Labyrinth>(converted);
   laby->print_maze();
-
+  auto gen = std::make_shared<Namegen>();
+  std::cout << gen->get_name() << std::endl;
   return 0;
 }

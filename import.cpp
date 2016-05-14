@@ -16,15 +16,17 @@
 
 #include "import.h"
 
-
 /* constructor */
-Import::Import(std::string filepath) {
-  this->filepath = filepath;
-  std::ifstream input(this->filepath.c_str());  // open the file
-  std::string line;                             // temp variable
-  while (getline(input, line)) {           // read lines as long as the file is
-    if(!line.empty()){
-      this->input_vector.push_back(line);    // save the line to the vector
+Import::Import() {}
+
+std::vector<std::string> Import::convert(std::string filepath) {
+  std::ifstream file(filepath.c_str());
+  std::vector<std::string> lines;
+  std::string line;
+  while (std::getline(file, line)) {
+    if (!line.empty()) {
+      lines.push_back(line);
     }
   }
+  return lines;
 }

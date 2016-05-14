@@ -9,12 +9,13 @@
  *        if15b038       *
  *************************/
 #include <random>
-
 #include "bot.h"
-/*
+#include "namegen.h"
+
 Bot::Bot(const std::shared_ptr<Labyrinth> maze) : maze(maze) {
+  auto namegen = std::make_shared<Namegen>();
   this->type = "Base";
-  this->name = "Bla";  // TODO(spitzfaust) Name generator
+  this->name = namegen->get_name();
   this->current_pos = this->maze->get_entry();
   this->history.push_back(this->current_pos);
   this->facing = SOUTH;
@@ -42,7 +43,7 @@ void Bot::make_step() {
   this->current_pos = pos;
   this->history.push_back(this->current_pos);
 }
-*/
+
 position Bot::calc_coordinates() const {
   position pos = this->current_pos;
   switch (this->facing) {

@@ -21,7 +21,8 @@ public:
   Namegen();
   std::string get_name() const;
 private:
-  std::vector<std::string> name_list;
-  std::vector<std::string> origin_list;
+  std::vector<std::string> botnames;
+  std::vector<std::string> botorigins;
+  std::vector<std::string> botadjectives;
 
 };
