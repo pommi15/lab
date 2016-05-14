@@ -11,7 +11,7 @@
 #include <random>
 
 #include "bot.h"
-
+/*
 Bot::Bot(const std::shared_ptr<Labyrinth> maze) : maze(maze) {
   this->type = "Base";
   this->name = "Bla";  // TODO(spitzfaust) Name generator
@@ -42,7 +42,7 @@ void Bot::make_step() {
   this->current_pos = pos;
   this->history.push_back(this->current_pos);
 }
-
+*/
 position Bot::calc_coordinates() const {
   position pos = this->current_pos;
   switch (this->facing) {

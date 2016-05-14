@@ -12,12 +12,20 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <fstream>
+#include "position.h"
+
 
 class Labyrinth {
 public:
-  Labyrinth(std::vector<std::string> walls);
+  Labyrinth(const std::vector<std::string> &walls);
 
-  std::vector<std::vector<bool>> maze;
+
   void print_maze();
+private:
+  std::vector<std::vector<bool>> maze;
+  position entry;
+  position exit;
+  int width;
+  int height;
+
 };
