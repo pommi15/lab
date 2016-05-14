@@ -9,7 +9,6 @@
  *        if15b038       *
  *************************/
 
-<<<<<<< HEAD
 #include <iostream>
 #include <memory>
 

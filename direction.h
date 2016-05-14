@@ -10,9 +10,10 @@
  *************************/
 #pragma once
 
-#include "direction.h"
-
-struct position {
-  int x;
-  int y;
+enum direction
+{
+  NORTH,
+  EAST,
+  SOUTH,
+  WEST
 };
