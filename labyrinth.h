@@ -17,22 +17,18 @@
 
 class Labyrinth {
 public:
-<<<<<<< HEAD
-  Labyrinth(std::vector<std::string> walls);
-  void print_maze();
-private:
-  std::vector<std::vector<bool>> maze;
-=======
   Labyrinth(const std::vector<std::string> &walls);
-
-
   void print_maze();
-private:
-  std::vector<std::vector<bool>> maze;
   position entry;
   position exit;
+  position get_entry();
+  position get_exit();
+  bool is_wall(position position);
+private:
+  void find_entry_and_exit();
+  bool entry_set;
+  bool exit_set;
+  std::vector<std::vector<bool>> maze;
   int width;
   int height;
->>>>>>> 9a5720eec3db497ecb12b86cf0dd07917ffdcea6
-
 };
