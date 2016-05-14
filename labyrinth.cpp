@@ -19,13 +19,14 @@
 Labyrinth::Labyrinth(std::vector<std::string> walls){
   int height = walls.size() - 1;
   int width = walls[1].size() - 1;
+  
   int tmp_height = 0;
   int tmp_width = 0;
 
   std::vector< std::vector< bool > > maze(height);
   /** Loop trough the rows of the tmp vector */
   for (auto& row : maze) {
-    std::vector<bool> tmp_row(width);
+    std::vector< bool > tmp_row(width);
     for(auto c : walls[tmp_height]){
       if(c == '#'){
         tmp_row[tmp_width] == false;
@@ -38,15 +39,15 @@ Labyrinth::Labyrinth(std::vector<std::string> walls){
     }
     std::cout << std::endl;
     tmp_height++;
-    /** replace the row with the tmp row */
+    /* replace the row with the tmp row */
     row.swap(tmp_row);
   }
   this->maze.swap(maze);
 }
+
 void Labyrinth::print_maze(){
   for (auto y : this->maze){
     for (auto x : y){
-      std::cout << x;
       if(x){
         std::cout << "*";
       }else{
