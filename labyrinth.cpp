@@ -19,7 +19,7 @@
 Labyrinth::Labyrinth(std::vector<std::string> walls){
   int height = walls.size() - 1;
   int width = walls[1].size() - 1;
-  
+
   int tmp_height = 0;
   int tmp_width = 0;
 
@@ -30,14 +30,11 @@ Labyrinth::Labyrinth(std::vector<std::string> walls){
     for(auto c : walls[tmp_height]){
       if(c == '#'){
         tmp_row[tmp_width] == false;
-        std::cout << "#";
       }else{
         tmp_row[tmp_width] == true;
-        std::cout << " ";
       }
       tmp_width++;
     }
-    std::cout << std::endl;
     tmp_height++;
     /* replace the row with the tmp row */
     row.swap(tmp_row);
