@@ -23,7 +23,7 @@ public:
   position get_exit();
   bool is_wall(position position);
 private:
-  void find_entry_and_exit();
+  void maze_entries();
   position entry;
   position exit;
   bool entry_set;
