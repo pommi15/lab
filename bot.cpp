@@ -14,7 +14,7 @@
 
 Bot::Bot(const std::shared_ptr<Labyrinth> maze) : maze(maze) {
   this->type = "Base";
-  this->name = "Bla";  // TODO Name generator
+  this->name = "Bla";  // TODO(spitzfaust) Name generator
   this->current_pos = this->maze->get_entry();
   this->history.push_back(this->current_pos);
   this->facing = SOUTH;
@@ -35,7 +35,7 @@ void Bot::make_step() {
   std::uniform_int_distribution<> dis(NORTH, WEST);
   do {
     if (!first) {
-      this->facing = dis(gen);
+      this->facing = static_cast<direction>(dis(gen));
     }
     pos = this->calc_coordinates();
   } while (this->maze->is_wall(pos));
@@ -43,9 +43,9 @@ void Bot::make_step() {
   this->history.push_back(this->current_pos);
 }
 
-position Bot::calc_coordinates() const{
+position Bot::calc_coordinates() const {
   position pos = this->current_pos;
-  switch(this->facing) {
+  switch (this->facing) {
     case NORTH:
       --pos.y;
       break;
