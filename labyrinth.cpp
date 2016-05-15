@@ -33,8 +33,7 @@ Labyrinth::Labyrinth(const std::vector<std::string>& walls) {
    */
   for (int y = 0; y < this->height; ++y) {
     std::vector<bool> tmp_row(this->width, true);
-
-    if (walls[y].size() > 2) {
+    if (walls[y][0] > 2) {
       for (int x = 0; x < this->width; ++x) {
         if (walls[y][x] == '#') {
           tmp_row[x] = false;
@@ -49,6 +48,7 @@ Labyrinth::Labyrinth(const std::vector<std::string>& walls) {
         tmp_maze.pop_back();
       }
     }
+
   }
   this->maze.swap(tmp_maze);
   print_maze();
