@@ -17,6 +17,6 @@
 class Import {
  public:
   Import();
-  std::vector<std::string> convert(const std::string filepath) const;
+  std::vector<std::string> convert(const std::string &filepath) const;
   std::vector<std::string> convert(const char* filepath) const;
 };

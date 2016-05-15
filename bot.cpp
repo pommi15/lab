@@ -26,6 +26,10 @@ void Bot::find_exit() {
   while (this->current_pos != exit) {
     this->make_step();
   }
+  unsigned int count = 1;
+  for(auto &pos : this->history) {
+    std::cout << count++ << "x: " << pos.x << " y: " << pos.y << std::endl;
+  }
 }
 
 void Bot::make_step() {
@@ -37,11 +41,14 @@ void Bot::make_step() {
   do {
     if (!first) {
       this->facing = static_cast<direction>(dis(gen));
+    } else {
+      first = false;
     }
     pos = this->calc_coordinates();
   } while (this->maze->is_wall(pos));
   this->current_pos = pos;
   this->history.push_back(this->current_pos);
+  ++this->step_counter;
 }
 
 position Bot::calc_coordinates() const {

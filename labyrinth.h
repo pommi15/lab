@@ -21,9 +21,9 @@ public:
   void print_maze();
   position get_entry();
   position get_exit();
-  bool is_wall(position position);
+  bool is_wall(const position &pos);
 private:
-  void find_entry_and_exit();
+  void maze_entries();
   position entry;
   position exit;
   bool entry_set;

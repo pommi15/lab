@@ -19,7 +19,7 @@
 /* constructor */
 Import::Import() {}
 
-std::vector<std::string> Import::convert(const std::string filepath) const{
+std::vector<std::string> Import::convert(const std::string &filepath) const{
   return this->convert(filepath.c_str());
 }
 
