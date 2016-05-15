@@ -19,8 +19,12 @@
 /* constructor */
 Import::Import() {}
 
-std::vector<std::string> Import::convert(std::string filepath) {
-  std::ifstream file(filepath.c_str());
+std::vector<std::string> Import::convert(const std::string filepath) const{
+  return this->convert(filepath.c_str());
+}
+
+std::vector<std::string> Import::convert(const char* filepath) const{
+  std::ifstream file(filepath);
   std::vector<std::string> lines;
   std::string line;
   while (std::getline(file, line)) {

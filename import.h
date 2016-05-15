@@ -16,6 +16,7 @@
 
 class Import {
  public:
-  Import();                      // constructor withouth file
-  std::vector<std::string> convert(std::string filepath);
+  Import();
+  std::vector<std::string> convert(const std::string filepath) const;
+  std::vector<std::string> convert(const char* filepath) const;
 };
