@@ -19,16 +19,19 @@
 /* constructor */
 Import::Import() {}
 
-std::vector<std::string> Import::convert(const std::string &filepath) const{
+std::vector<std::string> Import::convert(const std::string& filepath) const {
   return this->convert(filepath.c_str());
 }
 
-std::vector<std::string> Import::convert(const char* filepath) const{
+std::vector<std::string> Import::convert(const char* filepath) const {
   std::ifstream file(filepath);
   std::vector<std::string> lines;
   std::string line;
   while (std::getline(file, line)) {
-    if (!line.empty()) {
+    if (!line.empty() && line[line.size() - 1] == '\r') {
+      line = line.substr(0, line.size() - 1);
+    }
+    if (!line.empty() && line.size() > 1) {
       lines.push_back(line);
     }
   }

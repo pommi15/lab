@@ -48,14 +48,18 @@ Labyrinth::Labyrinth(const std::vector<std::string>& walls) {
         tmp_maze.pop_back();
       }
     }
-
   }
   this->maze.swap(tmp_maze);
   maze_entries();
 }
 /* function to print out the maze */
 void Labyrinth::print_maze() {
+  unsigned int count = 0;
   for (auto row : this->maze) {
+    if(count < 10) {
+      std::cout << " ";
+    }
+    std::cout << count++;
     for (auto cell : row) {
       if (cell) {
         std::cout << " ";
@@ -67,102 +71,43 @@ void Labyrinth::print_maze() {
   }
 }
 /* function to look for entry and exit */
-void Labyrinth::maze_entries(){
-  this->entry_set = false;
-  this->exit_set = false;
-  /* north wall is checked for entry and exit */
-  for (int i = 0; i < width; ++i ){
-    if(this->entry_set){
-      if(this->maze[0][i]){
-        this->exit.y = 0;
-        this->exit.x = i;
-        this->exit_set = true;
-        break;
-      }
-    }else{
-      if(this->maze[0][i]){
-        this->entry.y = 0;
-        this->entry.x = i;
-        this->entry_set = true;
-
-      }
-    }
-  }
-
-  /* if exit isn't set yet, the south wall is checked */
-  if(!this->exit_set){
-    for (int i = 0; i < width; ++i){
-      if(this->entry_set){
-        if(this->maze[this->height-1][i]){
-          this->exit.y = this->height;
-          this->exit.x = i;
-          this->exit_set = true;
-          break;
-        }
-      }else{
-        if(this->maze[this->height-1][i]){
-          this->entry.y = this->height;
-          this->entry.x = i;
-          this->entry_set = true;
-
-        }
-      }
-
-    }
-  }
-
-  /* if exit isn't set yet, the west wall is chekced */
-  if(!this->exit_set){
-    for (int i = 0; i < this->height; ++i){
-
-      if(this->entry_set){
-        if(this->maze[i][0]){
-          this->exit.y = i;
-          this->exit.x = 0;
-          this->exit_set = true;
-          break;
-        }
-      }else{
-        if(this->maze[i][0]){
-          this->entry.y = i;
-          this->entry.x = 0;
-          this->entry_set = true;
+void Labyrinth::maze_entries() {
+  entry_set = false;
+  exit_set = false;
+  for (int y = 0; y < height; ++y) {
+    for (int x = 0; x < width; ++x) {
+      if (this->maze[y][x]) {
+        if (((y == 0 || (y == height - 1)) && (x != 0 || x != width - 1)) ||
+            ((y != 0 || (y != height - 1)) && (x == 0 || x == width - 1))) {
+          if (!entry_set) {
+            this->entry.x = x;
+            this->entry.y = y;
+            entry_set = true;
+          } else if (!exit_set) {
+            this->exit.x = x;
+            this->exit.y = y;
+            exit_set = true;
+            break;
+          }
         }
       }
     }
-  }
-
-  /* if exit isn't set yet, the east wall is chekced */
-  if(!this->exit_set){
-    for (int i = 0; i < this->height; ++i){
-      if(this->entry_set){
-        if(this->maze[i][width-1]){
-          this->exit.y = i;
-          this->exit.x = width;
-          this->exit_set = true;
-          break;
-        }
-      }else{
-        if(this->maze[i][width-1]){
-          this->entry.y = i;
-          this->entry.x = width;
-          this->entry_set = true;
-        }
-      }
+    if(entry_set && exit_set){
+      break;
     }
   }
 }
 
-bool Labyrinth::is_wall(const position &pos){
-  if(pos.y < 0 || pos.y >= this->height || pos.x < 0 || pos.y >= this->width) {
+bool Labyrinth::is_wall(const position& pos) {
+  if (pos.y < 0 || pos.y >= this->height || pos.x < 0 || pos.y >= this->width) {
     return true;
   }
   return !this->maze[pos.y][pos.x];
 }
 
-position Labyrinth::get_entry(){
+position Labyrinth::get_entry() {
   return this->entry;
 }
-position Labyrinth::get_exit(){
+position Labyrinth::get_exit() {
   return this->exit;
 }
