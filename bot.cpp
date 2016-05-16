@@ -12,9 +12,8 @@
 #include "bot.h"
 #include "namegen.h"
 
-Bot::Bot(const std::shared_ptr<Labyrinth> maze) : maze(maze) {
+Bot::Bot(const std::shared_ptr<Labyrinth> maze) : type("Random"), maze(maze)  {
   auto namegen = std::make_shared<Namegen>();
-  this->type = "Base";
   this->name = namegen->get_name();
   this->current_pos = this->maze->get_entry();
   this->history.push_back(this->current_pos);
