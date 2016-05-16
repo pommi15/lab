@@ -26,7 +26,7 @@ public:
   /** find the exit of the maze */
   virtual void find_exit();
 
-private:
+protected:
   std::string type;
   std::string name;
   position current_pos;
