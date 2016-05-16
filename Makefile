@@ -7,14 +7,17 @@ CFLAGS=-g -Wall -std=c++11
 
 all: lab
 
-lab: lab.o bot.o import.o labyrinth.o namegen.o
-	${CC} ${CFLAGS} lab.o import.o bot.o labyrinth.o namegen.o -o lab
+lab: lab.o bot.o import.o labyrinth.o namegen.o tremaux.o
+	${CC} ${CFLAGS} lab.o import.o bot.o labyrinth.o namegen.o tremaux.o -o lab
 
 lab.o: lab.cpp
 	${CC} ${CFLAGS} -c lab.cpp -o lab.o
 
 bot.o: bot.cpp
 	${CC} ${CFLAGS} -c bot.cpp -o bot.o
+
+tremaux.o: tremaux.cpp
+	${CC} ${CFLAGS} -c tremaux.cpp -o tremaux.o
 
 impot.o: import.cpp
 	${CC} ${CFLAGS} -c import.cpp -o import.o
