@@ -35,6 +35,7 @@ protected:
   unsigned int step_counter;
   std::shared_ptr<Labyrinth> maze;
   virtual void make_step();
+  position calc_coordinates(position pos, const direction& dir) const;
   position calc_coordinates() const;
 
 

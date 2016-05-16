@@ -12,6 +12,7 @@
 #include "bot.h"
 #include "namegen.h"
 
+
 Bot::Bot(const std::shared_ptr<Labyrinth> maze) : type("Random"), maze(maze)  {
   auto namegen = std::make_shared<Namegen>();
   this->name = namegen->get_name();
@@ -50,9 +51,8 @@ void Bot::make_step() {
   ++this->step_counter;
 }
 
-position Bot::calc_coordinates() const {
-  position pos = this->current_pos;
-  switch (this->facing) {
+position Bot::calc_coordinates(position pos, const direction& dir) const {
+  switch (dir) {
     case NORTH:
       --pos.y;
       break;
@@ -67,4 +67,8 @@ position Bot::calc_coordinates() const {
       break;
   }
   return pos;
+}
+
+position Bot::calc_coordinates() const {
+  return this->calc_coordinates(this->current_pos, this->facing);
 }
