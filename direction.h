@@ -10,7 +10,7 @@
  *************************/
 #pragma once
 
-enum direction
+enum direction : int
 {
   NORTH,
   EAST,
