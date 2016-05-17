@@ -16,7 +16,7 @@
 
 #include "labyrinth.h"
 #include "position.h"
-
+#include "rlutil.h"
 /**
  * Constructor
  */
@@ -55,6 +55,7 @@ Labyrinth::Labyrinth(const std::vector<std::string>& walls) {
 /* function to print out the maze */
 void Labyrinth::print_maze() {
   unsigned int count = 0;
+  rlutil::saveDefaultColor();
   for (auto row : this->maze) {
     if(count < 10) {
       std::cout << " ";
@@ -62,9 +63,13 @@ void Labyrinth::print_maze() {
     std::cout << count++;
     for (auto cell : row) {
       if (cell) {
-        std::cout << " ";
+        rlutil::setColor(rlutil::BROWN);
+        std::cout << "\u2591";
+        rlutil::resetColor();
       } else {
-        std::cout << "#";
+        rlutil::setColor(rlutil::GREEN);
+        std::cout << "\u2588";
+        rlutil::resetColor();
       }
     }
     std::cout << std::endl;
