@@ -18,6 +18,12 @@ Bot::Bot(const std::shared_ptr<Labyrinth> maze, std::string name)
   this->current_pos = this->maze->get_entry();
   this->history.push_back(this->current_pos);
   this->facing = SOUTH;
+  if(!this->is_straight(this->current_pos)){
+    this->facing = this->turn_180(this->facing);
+    if(!this->is_straight(this->current_pos)){
+      this->facing = this->turn_direction(this->current_pos);
+    }
+  }
 }
 
 void Bot::find_exit() {
