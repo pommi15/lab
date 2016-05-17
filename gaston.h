@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <map>
 
 #include "bot.h"
 #include "position.h"
@@ -23,6 +24,8 @@ public:
   Gaston(const std::shared_ptr<Labyrinth> maze);
   Gaston(const std::shared_ptr<Labyrinth> maze, std::string name);
 private:
-  virtual void make_step();
-
+  enum marking : int{LAST, STOP};
+  void make_step();
+  std::map<position, marking> place_markings;
+  direction place_choice(position pos);
 };
