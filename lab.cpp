@@ -23,10 +23,12 @@ int main(int argc, char* argv[]) {
   auto import = std::make_shared<Import>();
   auto converted = import->convert(filepath);
   auto laby = std::make_shared<Labyrinth>(converted);
-  auto bot = std::make_shared<Bot>(laby);
+  auto namegen = std::make_shared<Namegen>();
+  auto bot = std::make_shared<Bot>(laby, namegen->get_name());
   std::cout << "Entry at: x: " << laby->get_entry().x << " y: " << laby->get_entry().y << std::endl;
   std::cout << "Exit at: x: " << laby->get_exit().x << " y: " << laby->get_exit().y << std::endl;
   laby->print_maze();
   bot->find_exit();
+  std::cout << namegen->get_name() << std::endl;
   return 0;
 }

@@ -10,12 +10,11 @@
  *************************/
 #include <random>
 #include "bot.h"
-#include "namegen.h"
 
+Bot::Bot(const std::shared_ptr<Labyrinth> maze) : Bot(maze, "Randy"){};
 
-Bot::Bot(const std::shared_ptr<Labyrinth> maze) : type("Random"), maze(maze)  {
-  auto namegen = std::make_shared<Namegen>();
-  this->name = namegen->get_name();
+Bot::Bot(const std::shared_ptr<Labyrinth> maze, std::string name)
+    : maze(maze), type("Random"), name(name), step_counter(0) {
   this->current_pos = this->maze->get_entry();
   this->history.push_back(this->current_pos);
   this->facing = SOUTH;
@@ -27,9 +26,19 @@ void Bot::find_exit() {
     this->make_step();
   }
   unsigned int count = 1;
-  for(auto &pos : this->history) {
+  for (auto& pos : this->history) {
     std::cout << count++ << "x: " << pos.x << " y: " << pos.y << std::endl;
   }
+}
+
+std::string Bot::get_name() {
+  return this->name;
+}
+std::string Bot::get_type() {
+  return this->type;
+}
+unsigned int Bot::get_step_counter() {
+  return this->step_counter;
 }
 
 void Bot::make_step() {
@@ -71,4 +80,54 @@ position Bot::calc_coordinates(position pos, const direction& dir) const {
 
 position Bot::calc_coordinates() const {
   return this->calc_coordinates(this->current_pos, this->facing);
+}
+
+bool Bot::is_straight(const position& pos) const {
+  return !this->maze->is_wall(this->calc_coordinates(pos, this->facing));
+}
+
+bool Bot::is_turn(const position& pos) const {
+  bool north = !this->maze->is_wall(this->calc_coordinates(pos, NORTH));
+  bool east = !this->maze->is_wall(this->calc_coordinates(pos, EAST));
+  bool south = !this->maze->is_wall(this->calc_coordinates(pos, SOUTH));
+  bool west = !this->maze->is_wall(this->calc_coordinates(pos, WEST));
+  return (north + east + south + west) == 2;
+}
+
+bool Bot::is_place(const position& pos) const {
+  bool north = !this->maze->is_wall(this->calc_coordinates(pos, NORTH));
+  bool east = !this->maze->is_wall(this->calc_coordinates(pos, EAST));
+  bool south = !this->maze->is_wall(this->calc_coordinates(pos, SOUTH));
+  bool west = !this->maze->is_wall(this->calc_coordinates(pos, WEST));
+  return (north + east + south + west) > 2;
+}
+
+bool Bot::is_cul_de_sac(const position& pos) const {
+  bool north = this->maze->is_wall(this->calc_coordinates(pos, NORTH));
+  bool east = this->maze->is_wall(this->calc_coordinates(pos, EAST));
+  bool south = this->maze->is_wall(this->calc_coordinates(pos, SOUTH));
+  bool west = this->maze->is_wall(this->calc_coordinates(pos, WEST));
+  return (north + east + south + west) == 3;
+}
+
+direction Bot::turn_180(const direction& dir) const {
+  return static_cast<direction>((dir + 2) % 4);
+}
+
+direction Bot::turn_right(const direction& dir) const {
+  return static_cast<direction>((dir + 1) % 4);
+}
+
+direction Bot::turn_left(const direction& dir) const {
+  return static_cast<direction>((dir - 1) % 4);
+}
+
+direction Bot::turn_direction(const position& pos) const {
+  direction right = this->turn_right(this->facing);
+  direction left = this->turn_left(this->facing);
+  if (!this->maze->is_wall(this->calc_coordinates(pos, right))) {
+    return right;
+  } else {
+    return left;
+  }
 }
