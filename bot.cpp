@@ -18,9 +18,9 @@ Bot::Bot(const std::shared_ptr<Labyrinth> maze, std::string name)
   this->current_pos = this->maze->get_entry();
   this->history.push_back(this->current_pos);
   this->facing = SOUTH;
-  if(!this->is_straight(this->current_pos)){
+  if (!this->is_straight(this->current_pos)) {
     this->facing = this->turn_180(this->facing);
-    if(!this->is_straight(this->current_pos)){
+    if (!this->is_straight(this->current_pos)) {
       this->facing = this->turn_direction(this->current_pos);
     }
   }
@@ -89,7 +89,12 @@ position Bot::calc_coordinates() const {
 }
 
 bool Bot::is_straight(const position& pos) const {
-  return !this->maze->is_wall(this->calc_coordinates(pos, this->facing));
+  bool right = this->maze->is_wall(
+      this->calc_coordinates(pos, this->turn_right(this->facing)));
+  bool left = this->maze->is_wall(
+      this->calc_coordinates(pos, this->turn_left(this->facing)));
+  return !this->maze->is_wall(this->calc_coordinates(pos, this->facing)) &&
+         right && left;
 }
 
 bool Bot::is_turn(const position& pos) const {
