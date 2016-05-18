@@ -64,7 +64,7 @@ void Gaston::make_step() {
   this->history.push_back(this->current_pos);
   ++this->step_counter;
 
-  //std::cin >> tmp;
+  std::cin >> tmp;
 }
 
 direction Gaston::place_choice(position pos){
