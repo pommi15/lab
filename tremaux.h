@@ -21,8 +21,9 @@
 #include "position.h"
 
 class Tremaux : public Bot {
-  std::map<position, std::array<std::shared_ptr<position>, 4>> places;
+  std::map<position, std::array<int, 4>> places;
   void make_step();
+  direction analyse_place(const position &pos);
 
  public:
   Tremaux(const std::shared_ptr<Labyrinth> maze);

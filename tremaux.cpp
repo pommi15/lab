@@ -16,10 +16,19 @@ void Tremaux::make_step() {
   } else if (this->is_turn(pos)) {
     step = this->turn_direction(pos);
   } else if (this->is_place(pos)) {
+    step = this->analyse_place(pos);
   } else if (this->is_cul_de_sac(pos)) {
   }
   this->facing = step;
   this->current_pos = this->calc_coordinates();
   this->history.push_back(this->current_pos);
   ++this->step_counter;
+}
+
+direction Tremaux::analyse_place(const position& pos){
+  if(!this->places.count(pos)){
+    this->places[pos] = {};
+
+  }
+  return NORTH;
 }
