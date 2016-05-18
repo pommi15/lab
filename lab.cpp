@@ -15,7 +15,7 @@
 
 #include "import.h"
 #include "labyrinth.h"
-#include "bot.h"
+#include "tremaux.h"
 #include "namegen.h"
 #include "gaston.h"
 
@@ -25,7 +25,9 @@ int main(int argc, char* argv[]) {
   auto converted = import->convert(filepath);
   auto laby = std::make_shared<Labyrinth>(converted);
   auto namegen = std::make_shared<Namegen>();
+
   auto bot = std::make_shared<Gaston>(laby, namegen->get_name());
+
   std::cout << "Entry at: x: " << laby->get_entry().x << " y: " << laby->get_entry().y << std::endl;
   std::cout << "Exit at: x: " << laby->get_exit().x << " y: " << laby->get_exit().y << std::endl;
   laby->print_maze();
