@@ -125,7 +125,7 @@ direction Bot::turn_right(const direction& dir) const {
 }
 
 direction Bot::turn_left(const direction& dir) const {
-  return static_cast<direction>((dir - 1) % 4);
+  return static_cast<direction>((dir + 3) % 4);
 }
 
 direction Bot::turn_direction(const position& pos) const {
