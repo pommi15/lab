@@ -19,6 +19,7 @@
 #include "position.h"
 #include "labyrinth.h"
 
+
 class Gaston : public Bot{
 public:
   Gaston(const std::shared_ptr<Labyrinth> maze);
