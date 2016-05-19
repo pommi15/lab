@@ -48,9 +48,8 @@ void Gaston::make_step() {
     /* place entrance is marked first if place has not been stepped into before*/
     step = place_choice(pos);
     std::cout << "placefacing: " << step << std::endl;
-    if(!this->place_markings.count(this->calc_coordinates(pos, step))){
-      this->place_markings[calc_coordinates()] = STOP;
-    }
+    this->place_markings[calc_coordinates()] = STOP;
+
   }else if (this->is_turn(pos)) {
     std::cout <<"turn" << this->step_counter << std::endl;
     step = this->turn_direction(pos);
