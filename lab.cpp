@@ -27,6 +27,8 @@ int main(int argc, char* argv[]) {
   auto bot = std::make_shared<Tremaux>(laby, namegen->get_name());
   std::cout << "Entry at: x: " << laby->get_entry().x << " y: " << laby->get_entry().y << std::endl;
   std::cout << "Exit at: x: " << laby->get_exit().x << " y: " << laby->get_exit().y << std::endl;
+  std::cout << "            1111111111222222222233333333334444444444" << std::endl;
+  std::cout << "  01234567890123456789012345678901234567890123456789" << std::endl;
   laby->print_maze();
   bot->find_exit();
   std::cout << namegen->get_name() << std::endl;

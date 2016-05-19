@@ -9,34 +9,45 @@
  *        if15b038       *
  *************************/
 #pragma once
-
+ #include <string>
 #include "direction.h"
 
 struct position {
   int x;
   int y;
-  bool operator==(const position& a) const
-  {
-      return (x == a.x && y == a.y);
+  std::string to_string() const {
+    std::string str = "x";
+    str += this->x;
+    str += "y";
+    str += this->y;
+    return str;
   }
-  bool operator!=(const position& a) const
+  bool operator==(const position& rhs) const
   {
-      return (x != a.x || y != a.y);
+
+      return (x == rhs.x && y == rhs.y);
   }
-  bool operator<(const position& a) const
+  bool operator!=(const position& rhs) const
   {
-      return (x < a.x && y < a.y);
+
+      return (x != rhs.x || y != rhs.y);
   }
-  bool operator>(const position& a) const
+  bool operator<(const position& rhs) const
   {
-      return (x > a.x && y > a.y);
+
+      return ((x < rhs.x) || (y < rhs.y));
   }
-  bool operator<=(const position& a) const
+  bool operator>(const position& rhs) const
   {
-      return (x <= a.x && y <= a.y);
+
+      return (x > rhs.x || y > rhs.y);
   }
-  bool operator>=(const position& a) const
+  bool operator<=(const position& rhs) const
   {
-      return (x >= a.x && y >= a.y);
+      return (x <= rhs.x || y <= rhs.y);
+  }
+  bool operator>=(const position& rhs) const
+  {
+      return (x >= rhs.x || y >= rhs.y);
   }
 };

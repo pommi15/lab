@@ -47,4 +47,5 @@ class Bot {
   direction turn_left(const direction& dir) const;
   direction turn_right(const direction& dir) const;
   direction turn_direction(const position& pos) const;
+  direction turn_direction(const position& pos, const direction &dir) const;
 };
