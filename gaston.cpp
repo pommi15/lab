@@ -65,7 +65,7 @@ void Gaston::make_step() {
 
 direction Gaston::place_choice(position pos){
   std::vector<direction> dir = {NORTH, EAST, SOUTH, WEST};
-  direction last = dir[3];
+  direction last = dir[1];
   for(int i = 0; i < 4; ++i){
     if((this->place_markings[this->calc_coordinates(pos, dir[i])] != STOP) && !this->maze->is_wall(this->calc_coordinates(pos, dir[i]))){
       std::cout << "placeface: i = " << i << std::endl;
@@ -76,6 +76,6 @@ direction Gaston::place_choice(position pos){
         last = dir[i];
       }
     }
-  }w
+  }
   return last;
 }
