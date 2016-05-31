@@ -18,14 +18,13 @@
 #include "bot.h"
 #include "position.h"
 #include "labyrinth.h"
-
+#include "marking.h"
 
 class Gaston : public Bot{
 public:
   Gaston(const std::shared_ptr<Labyrinth> maze);
   Gaston(const std::shared_ptr<Labyrinth> maze, std::string name);
 private:
-  enum marking : int{LAST, STOP};
   void make_step();
   std::map<position, marking> place_markings;
   direction place_choice(position pos);
