@@ -21,10 +21,10 @@
 #include "position.h"
 
 class Tremaux : public Bot {
-  std::map<position, std::array<int, 4>> places;
+  std::map<std::string, std::array<int, 4>> places;
   void make_step();
   direction analyse_place(const position &pos);
-
+  direction nearest_free_direction(const position &pos, direction now_facing) const;
  public:
   Tremaux(const std::shared_ptr<Labyrinth> maze);
   Tremaux(const std::shared_ptr<Labyrinth> maze, std::string name);
