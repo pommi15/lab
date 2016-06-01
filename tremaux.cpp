@@ -1,7 +1,15 @@
+/*************************
+ *       d[ o_0 ]b       *
+ *  the lab - experiment *
+ *          by           *
+ *    Thomas RAUHOFER    *
+ *        if15b029       *
+ *          and          *
+ *     Tobias WATZEK     *
+ *        if15b038       *
+ *************************/
 #include <iostream>
 #include <string>
-#include <algorithm>
-#include <exception>
 #include "rlutil.h"
 #include "tremaux.h"
 
@@ -60,7 +68,8 @@ direction Tremaux::analyse_place(const position& pos) {
     if (!this->places[pos_str][this->turn_180(turn)]) {
       /** Turn 180 degrees */
       turn = this->turn_180(turn);
-      /** Increment the number of visits by 2 - once for entering and once for exiting */
+      /** Increment the number of visits by 2 - once for entering and once for
+       * exiting */
       this->places[pos_str][turn] += 2;
     }
     /** Platz bekannt, Hinweg bekannt */
@@ -84,7 +93,6 @@ direction Tremaux::analyse_place(const position& pos) {
        * No turn found -> no unmarked way
        */
       if (!found_turn) {
-
         /** find way with only one mark */
         for (int i = 0; i < 4; ++i) {
           /** Foun a place with only one mark */
@@ -101,9 +109,11 @@ direction Tremaux::analyse_place(const position& pos) {
        * No turn found, all ways visited twice
        * THIS SHOULD DEFINITLY NOT HAPPEN
        */
-      if (!found_turn){
+      if (!found_turn) {
         std::cerr << this->name << ":" << std::endl;
-        std::cerr << "I didn't find a valid turn. Is the maze compromised?" << std::endl << "I will exit now..." << std::endl;
+        std::cerr << "I didn't find a valid turn. Is the maze compromised?"
+                  << std::endl
+                  << "I will exit now..." << std::endl;
         std::cerr << "(╯°□°）╯︵ ┻━┻" << std::endl;
         exit(EXIT_FAILURE);
       }

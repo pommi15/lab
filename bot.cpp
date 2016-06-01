@@ -139,15 +139,14 @@ direction Bot::turn_left(const direction& dir) const {
   return static_cast<direction>((dir + 3) % 4);
 }
 
-direction Bot::turn_direction(const position& pos, const direction &dir) const {
+direction Bot::turn_direction(const position& pos, const direction& dir) const {
   direction right = this->turn_right(dir);
   direction left = this->turn_left(dir);
   if (!this->maze->is_wall(this->calc_coordinates(pos, right))) {
     return right;
-  } else if(!this->maze->is_wall(this->calc_coordinates(pos, left))){
+  } else {
     return left;
   }
-
 }
 
 direction Bot::turn_direction(const position& pos) const {
