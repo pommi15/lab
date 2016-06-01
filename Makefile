@@ -19,7 +19,7 @@ bot.o: bot.cpp
 tremaux.o: tremaux.cpp
 	${CC} ${CFLAGS} -c tremaux.cpp -o tremaux.o
 
-impot.o: import.cpp
+import.o: import.cpp
 	${CC} ${CFLAGS} -c import.cpp -o import.o
 
 labyrinth.o: labyrinth.cpp

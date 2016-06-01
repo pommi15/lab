@@ -9,7 +9,7 @@
  *        if15b038       *
  *************************/
 #pragma once
- #include <string>
+#include <string>
 #include "direction.h"
 
 struct position {
@@ -22,32 +22,20 @@ struct position {
     str += this->y;
     return str;
   }
-  bool operator==(const position& rhs) const
-  {
-
-      return (x == rhs.x && y == rhs.y);
+  bool operator==(const position& rhs) const {
+    return (x == rhs.x && y == rhs.y);
   }
-  bool operator!=(const position& rhs) const
-  {
-
-      return (x != rhs.x || y != rhs.y);
+  bool operator!=(const position& rhs) const {
+    return (x != rhs.x || y != rhs.y);
   }
-  bool operator<(const position& rhs) const
-  {
-
-      return ((x < rhs.x) || (y < rhs.y));
+  bool operator<(const position& rhs) const {
+    return ((x < rhs.x) || (y < rhs.y));
   }
-  bool operator>(const position& rhs) const
-  {
-
-      return (x > rhs.x || y > rhs.y);
+  bool operator>(const position& rhs) const { return (x > rhs.x || y > rhs.y); }
+  bool operator<=(const position& rhs) const {
+    return (x <= rhs.x || y <= rhs.y);
   }
-  bool operator<=(const position& rhs) const
-  {
-      return (x <= rhs.x || y <= rhs.y);
-  }
-  bool operator>=(const position& rhs) const
-  {
-      return (x >= rhs.x || y >= rhs.y);
+  bool operator>=(const position& rhs) const {
+    return (x >= rhs.x || y >= rhs.y);
   }
 };

@@ -104,7 +104,7 @@ void Labyrinth::maze_entries() {
 }
 
 bool Labyrinth::is_wall(const position& pos) {
-  if (pos.y < 0 || pos.y >= this->height || pos.x < 0 || pos.y >= this->width) {
+  if (pos.y < 0 || pos.y >= this->height || pos.x < 0 || pos.x >= this->width) {
     return true;
   }
   return !this->maze[pos.y][pos.x];
