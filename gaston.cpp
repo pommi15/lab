@@ -64,49 +64,21 @@ void Gaston::make_step() {
 
 direction Gaston::place_choice(position pos){
   direction last = NORTH;
-  /* checks north exit */
-  std::cout << "North exit marking is: " << !this->place_markings.count(this->calc_coordinates(pos, NORTH).to_string()) << std::endl;
-  if(!this->place_markings.count(this->calc_coordinates(pos, NORTH).to_string()) && !this->maze->is_wall(this->calc_coordinates(pos, NORTH))){
-      std::cout << "placeface: i = " << "NORTH" << std::endl;
-      return NORTH;
-  }else{
-    if(this->place_markings[this->calc_coordinates(pos, NORTH).to_string()] == LAST){
-        std::cout << "lastface: i = " << "NORTH" << std::endl;
-        last = NORTH;
+  std::vector<direction> dir = {NORTH, EAST, SOUTH, WEST};
+  for(int i = 0; i < 4; ++i){
+    std::cout << "Facing: " << dir[i] << " Marking: "<< this->place_markings.count(this->calc_coordinates(pos, dir[i]).to_string()) << std::endl;
+    if(!this->place_markings.count(this->calc_coordinates(pos, dir[i]).to_string()) && !this->maze->is_wall(this->calc_coordinates(pos, dir[i]))){
+      std::cout << "placeface: i = " << dir[i] << std::endl;
+      return dir[i];
+    }else{
+      if(this->place_markings.count(this->calc_coordinates(pos, dir[1]).to_string())){
+        if(this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] == LAST){
+          std::cout << "lastface: i = " << dir[i] << std::endl;
+          last = dir[i];
+        }
+      }
     }
   }
-  /* checks east exit */
-  if(!this->place_markings.count(this->calc_coordinates(pos, EAST).to_string()) && !this->maze->is_wall(this->calc_coordinates(pos, EAST))){
-      std::cout << "placeface: i = " << "EAST" << std::endl;
-      return EAST;
-  }else{
-    if(this->place_markings[this->calc_coordinates(pos, EAST).to_string()] == LAST){
-        std::cout << "lastface: i = " << "EAST" << std::endl;
-        last = EAST;
-    }
-  }
-  /* checks west exit */
-  if(!this->place_markings.count(this->calc_coordinates(pos, SOUTH).to_string()) && !this->maze->is_wall(this->calc_coordinates(pos, SOUTH))){
-      std::cout << "placeface: i = " << "SOUTH" << std::endl;
-      return SOUTH;
-  }else{
-    if(this->place_markings[this->calc_coordinates(pos, SOUTH).to_string()] == LAST){
-        std::cout << "lastface: i = " << "SOUTH" << std::endl;
-        last = SOUTH;
-    }
-  }
-  /* checks south exit */
-
-  if(!this->place_markings.count(this->calc_coordinates(pos, WEST).to_string()) && !this->maze->is_wall(this->calc_coordinates(pos, WEST))){
-      std::cout << "placeface: i = " << "WEST" << std::endl;
-      return WEST;
-  }else{
-    if(this->place_markings[this->calc_coordinates(pos, WEST).to_string()] == LAST){
-        std::cout << "lastface: i = " << "WEST" << std::endl;
-        last = WEST;
-    }
-  }
-
   std::cout << "Took the last one " << std::endl;
   return last;
 }
@@ -115,8 +87,10 @@ direction Gaston::place_choice(position pos){
 bool Gaston::check_place(position pos){
   std::vector<direction> dir = {NORTH, EAST, SOUTH, WEST};
   for(int i = 0; i < 4; ++i){
-    if(this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] == LAST){
-      return false;
+    if(this->place_markings.count(this->calc_coordinates(pos, dir[1]).to_string())){
+      if(this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] == LAST){
+        return false;
+      }
     }
   }
   return true;
