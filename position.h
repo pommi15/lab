@@ -34,36 +34,26 @@ struct position {
   }
   bool operator<(const position& rhs) const
   {
-<<<<<<< HEAD
-      return (x < a.x || y < a.y);
-=======
 
       return ((x < rhs.x) || (y < rhs.y));
->>>>>>> tremaux
   }
   bool operator>(const position& rhs) const
   {
-<<<<<<< HEAD
-      return (x > a.x || y > a.y);
-=======
+
 
       return (x > rhs.x || y > rhs.y);
->>>>>>> tremaux
+
   }
   bool operator<=(const position& rhs) const
   {
-<<<<<<< HEAD
-      return (x <= a.x || y <= a.y);
-=======
+
       return (x <= rhs.x || y <= rhs.y);
->>>>>>> tremaux
+
   }
   bool operator>=(const position& rhs) const
   {
-<<<<<<< HEAD
-      return (x >= a.x || y >= a.y);
-=======
+
       return (x >= rhs.x || y >= rhs.y);
->>>>>>> tremaux
+
   }
 };

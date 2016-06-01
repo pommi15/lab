@@ -26,6 +26,7 @@ public:
   Gaston(const std::shared_ptr<Labyrinth> maze, std::string name);
 private:
   void make_step();
-  std::map<position, marking> place_markings;
+  std::map<std::string, marking> place_markings;
   direction place_choice(position pos);
+  bool check_place(position pos);
 };
