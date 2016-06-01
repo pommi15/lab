@@ -115,9 +115,15 @@ bool Bot::is_place(const position& pos) const {
 
 bool Bot::is_cul_de_sac(const position& pos) const {
   bool north = this->maze->is_wall(this->calc_coordinates(pos, NORTH));
+  std::cout << "cul_de_sac:" << std::endl;
+
   bool east = this->maze->is_wall(this->calc_coordinates(pos, EAST));
   bool south = this->maze->is_wall(this->calc_coordinates(pos, SOUTH));
   bool west = this->maze->is_wall(this->calc_coordinates(pos, WEST));
+  std::cout << "north: " << north << std::endl;
+  std::cout << "east: " << east << std::endl;
+  std::cout << "south: " << south << std::endl;
+  std::cout << "west: " << west << std::endl;
   return (north + east + south + west) == 3;
 }
 
@@ -133,12 +139,12 @@ direction Bot::turn_left(const direction& dir) const {
   return static_cast<direction>((dir + 3) % 4);
 }
 
-direction Bot::turn_direction(const position& pos, const direction &dir) const {
+direction Bot::turn_direction(const position& pos, const direction& dir) const {
   direction right = this->turn_right(dir);
   direction left = this->turn_left(dir);
   if (!this->maze->is_wall(this->calc_coordinates(pos, right))) {
     return right;
-  } else { // TODO Fixx
+  } else {
     return left;
   }
 }
