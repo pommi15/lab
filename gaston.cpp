@@ -44,7 +44,7 @@ void Gaston::make_step() {
     /* place entrance is marked LAST if place has not been stepped into before*/
     step = place_choice(pos);
     std::cout << "placefacing: " << step << std::endl;
-    this->place_markings[this->calc_coordinates(pos, step).to_string()] = STOP;
+    this->place_markings[(this->calc_coordinates(pos, step)).to_string()] = STOP;
     std::cout << "Leaving the place, choice on: " << this->place_markings[this->calc_coordinates(pos, step).to_string()] << std::endl;
 
   }else if (this->is_turn(pos)) {
@@ -80,6 +80,13 @@ direction Gaston::place_choice(position pos){
     }
   }
   std::cout << "Took the last one " << std::endl;
+  std::cout << "++++++++++++++++++++++++++++++"<< std::endl;
+  for(auto x : this->place_markings){
+    int i = 0;
+    std::cout << "Number " << i << " : " << x << std::endl;
+    ++i;
+  }
+  std::cout << "++++++++++++++++++++++++++++++"<< std::endl;
   return last;
 }
 
