@@ -8,8 +8,6 @@
  *     Tobias WATZEK     *
  *        if15b038       *
  *************************/
-
-#include <iostream>
 #include <memory>
 #include <string>
 
@@ -37,5 +35,6 @@ int main(int argc, char* argv[]) {
   laby->print_maze();
   bot->find_exit();
   std::cout << namegen->get_name() << std::endl;
+
   return 0;
 }

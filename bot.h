@@ -28,6 +28,7 @@ class Bot {
   std::string get_name();
   std::string get_type();
   unsigned int get_step_counter();
+  void print_history();
  protected:
   std::shared_ptr<Labyrinth> maze;
   std::string type;
