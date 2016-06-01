@@ -8,25 +8,20 @@
  *     Tobias WATZEK     *
  *        if15b038       *
  *************************/
-
 #pragma once
 #include <string>
-#include <vector>
-#include <map>
-#include <array>
 #include <memory>
 
 #include "bot.h"
 #include "labyrinth.h"
 #include "position.h"
 
-class Tremaux : public Bot {
-  std::map<std::string, std::array<int, 4>> places;
+class Righthand : public Bot {
+  direction origin_dir;
   void make_step();
-  direction analyse_place(const position& pos);
-  direction nearest_free_direction(const position& pos, direction now_facing) const;
-
+  bool wall_to_right(const position& pos, const direction& facing) const;
+  bool wall_to_left(const position& pos, const direction& facing) const;
  public:
-  Tremaux(const std::shared_ptr<Labyrinth> maze);
-  Tremaux(const std::shared_ptr<Labyrinth> maze, std::string name);
+  Righthand(const std::shared_ptr<Labyrinth> maze);
+  Righthand(const std::shared_ptr<Labyrinth> maze, std::string name);
 };

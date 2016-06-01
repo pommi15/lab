@@ -31,10 +31,6 @@ void Bot::find_exit() {
   while (this->current_pos != exit) {
     this->make_step();
   }
-  unsigned int count = 1;
-  for (auto& pos : this->history) {
-    std::cout << count++ << "x: " << pos.x << " y: " << pos.y << std::endl;
-  }
 }
 
 std::string Bot::get_name() {
@@ -43,6 +39,14 @@ std::string Bot::get_name() {
 std::string Bot::get_type() {
   return this->type;
 }
+
+void Bot::print_history() {
+  unsigned int count = 1;
+  for (auto& pos : this->history) {
+    std::cout << count++ << "x: " << pos.x << " y: " << pos.y << std::endl;
+  }
+}
+
 unsigned int Bot::get_step_counter() {
   return this->step_counter;
 }
@@ -89,12 +93,9 @@ position Bot::calc_coordinates() const {
 }
 
 bool Bot::is_straight(const position& pos) const {
-  bool right = this->maze->is_wall(
-      this->calc_coordinates(pos, this->turn_right(this->facing)));
-  bool left = this->maze->is_wall(
-      this->calc_coordinates(pos, this->turn_left(this->facing)));
-  return !this->maze->is_wall(this->calc_coordinates(pos, this->facing)) &&
-         right && left;
+  bool right = this->maze->is_wall(this->calc_coordinates(pos, this->turn_right(this->facing)));
+  bool left = this->maze->is_wall(this->calc_coordinates(pos, this->turn_left(this->facing)));
+  return !this->maze->is_wall(this->calc_coordinates(pos, this->facing)) && right && left;
 }
 
 bool Bot::is_turn(const position& pos) const {
@@ -115,15 +116,10 @@ bool Bot::is_place(const position& pos) const {
 
 bool Bot::is_cul_de_sac(const position& pos) const {
   bool north = this->maze->is_wall(this->calc_coordinates(pos, NORTH));
-  std::cout << "cul_de_sac:" << std::endl;
 
   bool east = this->maze->is_wall(this->calc_coordinates(pos, EAST));
   bool south = this->maze->is_wall(this->calc_coordinates(pos, SOUTH));
   bool west = this->maze->is_wall(this->calc_coordinates(pos, WEST));
-  std::cout << "north: " << north << std::endl;
-  std::cout << "east: " << east << std::endl;
-  std::cout << "south: " << south << std::endl;
-  std::cout << "west: " << west << std::endl;
   return (north + east + south + west) == 3;
 }
 

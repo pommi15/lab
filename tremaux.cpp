@@ -13,11 +13,9 @@
 #include "rlutil.h"
 #include "tremaux.h"
 
-Tremaux::Tremaux(const std::shared_ptr<Labyrinth> maze)
-    : Tremaux(maze, "Tremauxy") {}
+Tremaux::Tremaux(const std::shared_ptr<Labyrinth> maze) : Tremaux(maze, "Tremauxy") {}
 
-Tremaux::Tremaux(const std::shared_ptr<Labyrinth> maze, std::string name)
-    : Bot(maze, name) {
+Tremaux::Tremaux(const std::shared_ptr<Labyrinth> maze, std::string name) : Bot(maze, name) {
   this->type = "Tremaux";
 }
 
@@ -39,8 +37,7 @@ void Tremaux::make_step() {
   ++this->step_counter;
 }
 
-direction Tremaux::nearest_free_direction(const position& pos,
-                                          direction now_facing) const {
+direction Tremaux::nearest_free_direction(const position& pos, direction now_facing) const {
   if (this->maze->is_wall(this->calc_coordinates(pos, now_facing))) {
     now_facing = this->turn_direction(pos, now_facing);
   }
@@ -54,10 +51,8 @@ direction Tremaux::analyse_place(const position& pos) {
   if (!this->places.count(pos_str)) {
     this->places[pos_str] = {};
     for (int i = 0; i < 4; ++i) {
-      this->places[pos_str][i] = (this->maze->is_wall(this->calc_coordinates(
-                                      pos, static_cast<direction>(i)))
-                                      ? -1
-                                      : 0);
+      this->places[pos_str][i] =
+          (this->maze->is_wall(this->calc_coordinates(pos, static_cast<direction>(i))) ? -1 : 0);
     }
     ++this->places[pos_str][this->turn_180(turn)];
 
@@ -111,8 +106,7 @@ direction Tremaux::analyse_place(const position& pos) {
        */
       if (!found_turn) {
         std::cerr << this->name << ":" << std::endl;
-        std::cerr << "I didn't find a valid turn. Is the maze compromised?"
-                  << std::endl
+        std::cerr << "I didn't find a valid turn. Is the maze compromised?" << std::endl
                   << "I will exit now..." << std::endl;
         std::cerr << "(╯°□°）╯︵ ┻━┻" << std::endl;
         exit(EXIT_FAILURE);

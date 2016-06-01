@@ -19,7 +19,7 @@ Namegen::Namegen() {
   this->botadjectives = import->convert("botdata/botadjectives.txt");
 }
 
-std::string Namegen::get_name() const{
+std::string Namegen::get_name() const {
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_int_distribution<> names(0, this->botnames.size() - 1);
@@ -30,5 +30,3 @@ std::string Namegen::get_name() const{
   name = name + " from " + this->botorigins[origins(gen)];
   return name;
 }
-
-
