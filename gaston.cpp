@@ -39,7 +39,7 @@ void Gaston::make_step() {
       this->place_markings[calc_coordinates(pos, turn_180(step))] = LAST;
       std::cout << "Entering the place: " << this->place_markings[this->calc_coordinates(pos, step)] << std::endl;
     }
-    std::cout <<"place" << this->step_counter << std::endl;
+    std::cout <<"place" << std::endl;
     /* place entrance is marked LAST if place has not been stepped into before*/
     step = place_choice(pos);
     std::cout << "placefacing: " << step << std::endl;
