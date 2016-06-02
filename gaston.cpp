@@ -59,19 +59,20 @@ void Gaston::make_step() {
   this->current_pos = this->calc_coordinates(pos, this->facing);
   this->history.push_back(this->current_pos);
   ++this->step_counter;
-  rlutil::anykey();
+  //rlutil::anykey();
 }
 
 direction Gaston::place_choice(position pos){
   direction last = NORTH;
   std::vector<direction> dir = {NORTH, EAST, SOUTH, WEST};
   for(int i = 0; i < 4; ++i){
+
     std::cout << "Facing: " << dir[i] << " Marking: "<< this->place_markings.count(this->calc_coordinates(pos, dir[i]).to_string()) << std::endl;
-    if(!this->place_markings.count(this->calc_coordinates(pos, dir[i]).to_string()) && !this->maze->is_wall(this->calc_coordinates(pos, dir[i]))){
+    if(this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] == NONE && !this->maze->is_wall(this->calc_coordinates(pos, dir[i]))){
       std::cout << "placeface: i = " << dir[i] << std::endl;
       return dir[i];
     }else{
-      if(this->place_markings.count(this->calc_coordinates(pos, dir[1]).to_string())){
+      if(this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] != NONE){
         if(this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] == LAST){
           std::cout << "lastface: i = " << dir[i] << std::endl;
           last = dir[i];
@@ -80,13 +81,6 @@ direction Gaston::place_choice(position pos){
     }
   }
   std::cout << "Took the last one " << std::endl;
-  std::cout << "++++++++++++++++++++++++++++++"<< std::endl;
-  for(auto x : this->place_markings){
-    int i = 0;
-    std::cout << "Number " << i << " : " << x << std::endl;
-    ++i;
-  }
-  std::cout << "++++++++++++++++++++++++++++++"<< std::endl;
   return last;
 }
 
@@ -94,11 +88,11 @@ direction Gaston::place_choice(position pos){
 bool Gaston::check_place(position pos){
   std::vector<direction> dir = {NORTH, EAST, SOUTH, WEST};
   for(int i = 0; i < 4; ++i){
-    if(this->place_markings.count(this->calc_coordinates(pos, dir[1]).to_string())){
-      if(this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] == LAST){
+    if(this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] != LAST && this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] != STOP){
+      this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] = NONE;
+    }else if(this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] == LAST){
         return false;
       }
     }
-  }
   return true;
 }
