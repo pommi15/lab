@@ -37,8 +37,8 @@ static const char USAGE[] =
 
 static const char VERSION[] = "lab - maze solver: version 1.0";
 
-    int main(int argc, char* argv[]) {
-  if (argc < 2) {
+int main(int argc, char* argv[]) {
+  /*if (argc < 2) {
     std::cerr << "Error " << argv[0] << ": "
               << "Not enough arguments provided." << std::endl;
     std::cerr << USAGE << std::endl;
@@ -80,10 +80,10 @@ static const char VERSION[] = "lab - maze solver: version 1.0";
         std::cout << "You hit menu" << std::endl;
         break;
     }
-  }
-  std::ifstream file(filepath);
-  std::cout << argv[argc - 1] << std::endl;
-  // auto solver = std::make_shared<Solver>(std::string(argv[1]));
-  // solver->solve();
+  }*/
+  //std::ifstream file(filepath);
+  //std::cout << argv[argc - 1] << std::endl;
+  auto solver = std::make_shared<Solver>(std::string(argv[1]));
+  solver->solve();
   return 0;
 }

@@ -6,6 +6,7 @@
 #include "namegen.h"
 #include "righthand.h"
 #include "tremaux.h"
+#include "gaston.h"
 
 Solver::Solver(std::string filepath) : filepath(filepath) {
   this->load_labyrinth();
@@ -21,7 +22,7 @@ void Solver::load_labyrinth() {
 void Solver::setup_bots() {
   auto namegen = std::make_shared<Namegen>();
   this->bots[0] = std::make_shared<Righthand>(this->laby, namegen->get_name());
-  this->bots[1] = std::make_shared<Righthand>(this->laby, namegen->get_name());
+  this->bots[1] = std::make_shared<Gaston>(this->laby, namegen->get_name());
   this->bots[2] = std::make_shared<Tremaux>(this->laby, namegen->get_name());
 }
 
