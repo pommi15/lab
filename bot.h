@@ -25,18 +25,21 @@ class Bot {
   Bot(const std::shared_ptr<Labyrinth> maze, std::string name);
   /** find the exit of the maze */
   virtual void find_exit();
-  std::string get_name();
-  std::string get_type();
-  unsigned int get_step_counter();
-  void print_history();
+  std::string get_name() const;
+  std::string get_type() const;
+  unsigned int get_step_counter() const;
+  std::vector<position> get_history() const;
+  void print_history() const;
+  bool is_solved() const;
  protected:
   std::shared_ptr<Labyrinth> maze;
-  std::string type;
   std::string name;
+  std::string type;
   position current_pos;
   direction facing;
   std::vector<position> history;
   unsigned int step_counter;
+  bool solved;
   virtual void make_step();
   position calc_coordinates(position pos, const direction& dir) const;
   position calc_coordinates() const;

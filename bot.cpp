@@ -14,7 +14,7 @@
 Bot::Bot(const std::shared_ptr<Labyrinth> maze) : Bot(maze, "Randy"){};
 
 Bot::Bot(const std::shared_ptr<Labyrinth> maze, std::string name)
-    : maze(maze), type("Random"), name(name), step_counter(0) {
+    : maze(maze), name(name), type("Random"), step_counter(0), solved(false) {
   this->current_pos = this->maze->get_entry();
   this->history.push_back(this->current_pos);
   this->facing = SOUTH;
@@ -31,23 +31,28 @@ void Bot::find_exit() {
   while (this->current_pos != exit) {
     this->make_step();
   }
+  solved = true;
 }
 
-std::string Bot::get_name() {
+std::string Bot::get_name() const {
   return this->name;
 }
-std::string Bot::get_type() {
+std::string Bot::get_type() const {
   return this->type;
 }
 
-void Bot::print_history() {
+std::vector<position> Bot::get_history() const {
+  return this->history;
+}
+
+void Bot::print_history() const {
   unsigned int count = 1;
   for (auto& pos : this->history) {
-    std::cout << count++ << "x: " << pos.x << " y: " << pos.y << std::endl;
+    std::cout << count++ << pos << std::endl;
   }
 }
 
-unsigned int Bot::get_step_counter() {
+unsigned int Bot::get_step_counter() const {
   return this->step_counter;
 }
 
@@ -147,4 +152,8 @@ direction Bot::turn_direction(const position& pos, const direction& dir) const {
 
 direction Bot::turn_direction(const position& pos) const {
   return this->turn_direction(pos, this->facing);
+}
+
+bool Bot::is_solved() const {
+  return this->solved;
 }

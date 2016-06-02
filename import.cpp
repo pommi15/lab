@@ -35,5 +35,6 @@ std::vector<std::string> Import::convert(const char* filepath) const {
       lines.push_back(line);
     }
   }
+  file.close();
   return lines;
 }

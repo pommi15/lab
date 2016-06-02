@@ -20,10 +20,12 @@ class Solver {
   std::string filepath;
   std::shared_ptr<Labyrinth> laby;
   std::array<std::shared_ptr<Bot>, 3> bots;
-  void load_labyrinth();
+  bool graphic;
+  void load_maze();
   void setup_bots();
  public:
-  Solver(std::string filepath);
+  Solver(std::string filepath, bool graphic);
   void solve();
-
+  void print_maze() const;
+  void print_result() const;
 };

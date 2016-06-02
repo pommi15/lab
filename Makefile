@@ -10,7 +10,6 @@ all: lab
 lab: lab.o bot.o import.o labyrinth.o namegen.o tremaux.o righthand.o solver.o gaston.o
 	${CC} ${CFLAGS} lab.o solver.o import.o bot.o labyrinth.o namegen.o tremaux.o righthand.o gaston.o -o lab
 
-
 lab.o: lab.cpp
 	${CC} ${CFLAGS} -c lab.cpp -o lab.o
 

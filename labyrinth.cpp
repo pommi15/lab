@@ -12,6 +12,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <fstream>
 
 #include "labyrinth.h"
@@ -53,28 +54,62 @@ Labyrinth::Labyrinth(const std::vector<std::string>& walls) {
   maze_entries();
 }
 /* function to print out the maze */
-void Labyrinth::print_maze() {
+void Labyrinth::print_maze() const {
   unsigned int count = 0;
   rlutil::saveDefaultColor();
   for (auto row : this->maze) {
-    if(count < 10) {
+    if (count < 10) {
       std::cout << " ";
     }
     std::cout << count++;
     for (auto cell : row) {
       if (cell) {
-        rlutil::setColor(rlutil::BROWN);
-        std::cout << "\u2591";
+        rlutil::setBackgroundColor(rlutil::BLACK);
+        std::cout << " ";
         rlutil::resetColor();
       } else {
-        rlutil::setColor(rlutil::GREEN);
-        std::cout << "\u2588";
+        rlutil::setBackgroundColor(rlutil::GREEN);
+        std::cout << " ";
         rlutil::resetColor();
       }
     }
     std::cout << std::endl;
   }
 }
+
+void Labyrinth::print_maze(const std::vector<position>& history) const {
+  int count_y = 0;
+  int count_x = 0;
+  rlutil::saveDefaultColor();
+  for (auto row : this->maze) {
+    for (auto cell : row) {
+      if (cell) {
+        position current_pos;
+        current_pos.x = count_x;
+        current_pos.y = count_y;
+        if (std::find(history.begin(), history.end(), current_pos) != history.end()) {
+          rlutil::setBackgroundColor(rlutil::RED);
+          std::cout << " ";
+          rlutil::resetColor();
+        } else {
+          rlutil::setBackgroundColor(rlutil::BLACK);
+          std::cout << " ";
+          rlutil::resetColor();
+        }
+
+      } else {
+        rlutil::setBackgroundColor(rlutil::GREEN);
+        std::cout << " ";
+        rlutil::resetColor();
+      }
+      ++count_x;
+    }
+    std::cout << std::endl;
+    ++count_y;
+    count_x = 0;
+  }
+}
+
 /* function to look for entry and exit */
 void Labyrinth::maze_entries() {
   entry_set = false;
@@ -97,7 +132,7 @@ void Labyrinth::maze_entries() {
         }
       }
     }
-    if(entry_set && exit_set){
+    if (entry_set && exit_set) {
       break;
     }
   }

@@ -18,7 +18,8 @@
 class Labyrinth {
 public:
   Labyrinth(const std::vector<std::string> &walls);
-  void print_maze();
+  void print_maze() const;
+  void print_maze(const std::vector<position> &history) const;
   position get_entry();
   position get_exit();
   bool is_wall(const position &pos);

@@ -10,32 +10,26 @@
  *************************/
 #pragma once
 #include <string>
+#include <iostream>
 #include "direction.h"
 
 struct position {
   int x;
   int y;
   std::string to_string() const {
-    std::string str = "x";
-    str += this->x;
-    str += "y";
-    str += this->y;
+    std::string str = "x ";
+    str += std::to_string(this->x);
+    str += " y ";
+    str += std::to_string(this->y);
     return str;
   }
-  bool operator==(const position& rhs) const {
-    return (x == rhs.x && y == rhs.y);
+  friend std::ostream& operator<<(std::ostream& out, const position& rhs) {
+    return out << rhs.to_string();
   }
-  bool operator!=(const position& rhs) const {
-    return (x != rhs.x || y != rhs.y);
+  friend bool operator==(const position& lhs, const position& rhs) {
+    return ((lhs.x == rhs.x) && (lhs.y == rhs.y));
   }
-  bool operator<(const position& rhs) const {
-    return ((x < rhs.x) || (y < rhs.y));
-  }
-  bool operator>(const position& rhs) const { return (x > rhs.x || y > rhs.y); }
-  bool operator<=(const position& rhs) const {
-    return (x <= rhs.x || y <= rhs.y);
-  }
-  bool operator>=(const position& rhs) const {
-    return (x >= rhs.x || y >= rhs.y);
+  friend bool operator!=(const position& lhs, const position& rhs) {
+    return !(lhs == rhs);
   }
 };
