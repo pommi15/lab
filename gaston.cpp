@@ -64,24 +64,30 @@ void Gaston::make_step() {
 direction Gaston::place_choice(position pos) {
   direction last = NORTH;
   std::vector<direction> dir = {NORTH, EAST, SOUTH, WEST};
+  /* Every direction is checked */
   for (int i = 0; i < 4; ++i) {
+    /* If the marking of the direction is NONE and it is not a wall the direction is returned */
     if (this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] == NONE &&
         !this->maze->is_wall(this->calc_coordinates(pos, dir[i]))) {
       return dir[i];
     } else {
       if (this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] != NONE) {
+        /* else if the marking of the direction is LAST it is saved in last */
         if (this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] == LAST) {
           last = dir[i];
         }
       }
     }
   }
+  /* If no corridor without marking is found, the last one with LAST is returned */
   return last;
 }
 
 /* returns true if no place marking of plae is last */
 bool Gaston::check_place(position pos) {
   std::vector<direction> dir = {NORTH, EAST, SOUTH, WEST};
+  /* every direction is checked and set to NONE id no marking is placed yet
+     if none is LAST true is returned  */
   for (int i = 0; i < 4; ++i) {
     if (this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] != LAST &&
         this->place_markings[this->calc_coordinates(pos, dir[i]).to_string()] != STOP) {
