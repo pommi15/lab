@@ -19,6 +19,7 @@
 #define required_argument 1
 #define optional_argument 2
 
+/** usage string */
 static const char USAGE[] =
     R"(lab
   Read in a maze from a file and let one or
@@ -35,23 +36,18 @@ static const char USAGE[] =
     -v --version    Show the version
 )";
 
-
+/** version string */
 static const char VERSION[] = "lab - maze solver: version 1.0";
 
 int main(int argc, char* argv[]) {
+  /** check if enough arguments where provided */
   if (argc < 2) {
     std::cerr << "Error " << argv[0] << ": "
               << "Not enough arguments provided." << std::endl;
     return EXIT_FAILURE;
   }
-  std::ifstream file(argv[argc - 1]);
-  if(!file.good()) {
-    std::cerr << "Error " << argv[0] << ": "
-              << "Can't open filepath." << std::endl;
-    file.close();
-    return EXIT_FAILURE;
-  }
-  file.close();
+
+  /** options for getopt_long */
   const struct option longopts[] = {
       {"version", no_argument, 0, 'v'},
       {"help", no_argument, 0, 'h'},
@@ -63,27 +59,40 @@ int main(int argc, char* argv[]) {
   bool graphic = false;
 
   opterr = 1;
-
+  /** get all option parameters */
   while (iarg != -1) {
     iarg = getopt_long(argc, argv, "vhg", longopts, &index);
     switch (iarg) {
       case 'h':
+        /** help - print the usage and exit */
         std::cout << USAGE << std::endl;
         return EXIT_SUCCESS;
         break;
 
       case 'v':
+        /** version - print the version and exit */
         std::cout << VERSION << std::endl;
         return EXIT_SUCCESS;
         break;
 
       case 'g':
+        /** graphical output flag */
         graphic = true;
         break;
     }
   }
-  std::cout << argv[argc - 1] << "  "  << graphic<< std::endl;
-
+  /** try to open the filepath */
+  std::ifstream file(argv[argc - 1]);
+  /** check if file could be opened */
+  if (!file.good()) {
+    std::cerr << "Error " << argv[0] << ": "
+              << "Can't open filepath." << std::endl;
+    file.close();
+    return EXIT_FAILURE;
+  }
+  /** close the file */
+  file.close();
+  /** ptr to solver object with path to maze and graphic option */
   auto solver = std::make_shared<Solver>(std::string(argv[argc - 1]), graphic);
   solver->print_maze();
   solver->solve();

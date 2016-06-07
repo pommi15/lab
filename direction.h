@@ -9,7 +9,9 @@
  *        if15b038       *
  *************************/
 #pragma once
-
+/**
+ * Enum for directions
+ */
 enum direction : int
 {
   NORTH,

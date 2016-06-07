@@ -18,23 +18,31 @@
 
 /* constructor */
 Import::Import() {}
-
+/** call convert with c_str */
 std::vector<std::string> Import::convert(const std::string& filepath) const {
   return this->convert(filepath.c_str());
 }
-
+/** convert file to vector of strings */
 std::vector<std::string> Import::convert(const char* filepath) const {
+  /** open file */
   std::ifstream file(filepath);
+  /** vector with lines */
   std::vector<std::string> lines;
+  /** current line */
   std::string line;
+  /** go through each line */
   while (std::getline(file, line)) {
+    /** check if line is not empty and has a windows line ending */
     if (!line.empty() && line[line.size() - 1] == '\r') {
+      /** remove the windows line ending */
       line = line.substr(0, line.size() - 1);
     }
+    /** check if line is not empty and the size is bigger than one */
     if (!line.empty() && line.size() > 1) {
       lines.push_back(line);
     }
   }
+  /** close the file */
   file.close();
   return lines;
 }
