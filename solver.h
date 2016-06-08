@@ -12,20 +12,31 @@
 
 #include <string>
 #include <memory>
-#include <array>
+#include <vector>
 #include "labyrinth.h"
 #include "bot.h"
 
+/** solver class */
 class Solver {
+  /** path to maze */
   std::string filepath;
+  /** maze */
   std::shared_ptr<Labyrinth> laby;
-  std::array<std::shared_ptr<Bot>, 3> bots;
+  /** 3 bots */
+  std::vector<std::shared_ptr<Bot>> bots;
+  /** graphic mode  */
   bool graphic;
+  /** load the maze */
   void load_maze();
-  void setup_bots();
+  /** setup the bots */
+  void setup_bots(bool right, bool tremaux, bool gaston);
  public:
-  Solver(std::string filepath, bool graphic);
+  /** ctor */
+  Solver(std::string filepath, bool right, bool tremaux, bool gaston, bool graphic);
+  /** solve the maze */
   void solve();
+  /** print the maze */
   void print_maze() const;
+  /** print the result */
   void print_result() const;
 };

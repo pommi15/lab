@@ -30,7 +30,7 @@ Labyrinth::Labyrinth(const std::vector<std::string>& walls) {
   std::vector<std::vector<bool>> tmp_maze(this->height);
 
   /**
-   * Loop through the rows
+   * Loop through the rows and replace # with false and space chars with true
    */
   for (int y = 0; y < this->height; ++y) {
     std::vector<bool> tmp_row(this->width, true);
@@ -50,7 +50,9 @@ Labyrinth::Labyrinth(const std::vector<std::string>& walls) {
       }
     }
   }
+  /** swap the maze with the tmp_maze */
   this->maze.swap(tmp_maze);
+  /** find entry and exit */
   maze_entries();
 }
 /* function to print out the maze */
@@ -76,7 +78,7 @@ void Labyrinth::print_maze() const {
     std::cout << std::endl;
   }
 }
-
+/** print out the maze with a highlighted path */
 void Labyrinth::print_maze(const std::vector<position>& history) const {
   int count_y = 0;
   int count_x = 0;
@@ -87,6 +89,7 @@ void Labyrinth::print_maze(const std::vector<position>& history) const {
         position current_pos;
         current_pos.x = count_x;
         current_pos.y = count_y;
+        /** check if the current position is in the history */
         if (std::find(history.begin(), history.end(), current_pos) != history.end()) {
           rlutil::setBackgroundColor(rlutil::RED);
           std::cout << " ";
@@ -112,13 +115,17 @@ void Labyrinth::print_maze(const std::vector<position>& history) const {
 
 /* function to look for entry and exit */
 void Labyrinth::maze_entries() {
-  entry_set = false;
-  exit_set = false;
+  bool entry_set = false;
+  bool exit_set = false;
+  /** loop through the maze */
   for (int y = 0; y < height; ++y) {
     for (int x = 0; x < width; ++x) {
+      /** check if position is not a wall */
       if (this->maze[y][x]) {
+        /** check if current position is on the outside walls */
         if (((y == 0 || (y == height - 1)) && (x != 0 || x != width - 1)) ||
             ((y != 0 || (y != height - 1)) && (x == 0 || x == width - 1))) {
+          /** check if entry is set */
           if (!entry_set) {
             this->entry.x = x;
             this->entry.y = y;
@@ -132,12 +139,14 @@ void Labyrinth::maze_entries() {
         }
       }
     }
+    /** break out of the loop if everything is found */
     if (entry_set && exit_set) {
       break;
     }
   }
 }
 
+/** check if position is a wall or outside the maze */
 bool Labyrinth::is_wall(const position& pos) {
   if (pos.y < 0 || pos.y >= this->height || pos.x < 0 || pos.x >= this->width) {
     return true;

@@ -15,14 +15,19 @@
 
 #include "import.h"
 
-class Namegen
-{
-public:
+/** namegenerator class */
+class Namegen {
+ public:
+  /** constructor */
   Namegen();
+  /** get a random name */
   std::string get_name() const;
-private:
-  std::vector<std::string> botnames;
-  std::vector<std::string> botorigins;
-  std::vector<std::string> botadjectives;
 
+ private:
+  /** names */
+  std::vector<std::string> botnames;
+  /** origins */
+  std::vector<std::string> botorigins;
+  /** adjectives */
+  std::vector<std::string> botadjectives;
 };

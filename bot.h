@@ -28,6 +28,7 @@ class Bot {
   Bot(const std::shared_ptr<Labyrinth> maze);
   /** constructor accept name */
   Bot(const std::shared_ptr<Labyrinth> maze, std::string name);
+  virtual ~Bot();
   /** find the exit of the maze */
   virtual void find_exit();
   std::string get_name() const;

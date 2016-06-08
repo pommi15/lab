@@ -26,14 +26,19 @@ static const char USAGE[] =
   more bots find the exit.
   Usage:
     lab <FILE>
-    lab (-g | --graphic) <FILE>
+    lab <FILE> (-t | -bot) [1-3]
+    lab <FILE> (-g | --graphic)
     lab (-h | --help)
     lab (-v | --version)
 
   Options:
-    -h --help       Show this help message
-    -g --graphic    Visualise the way of the bots
-    -v --version    Show the version
+    -t [1-3] --bot=[1-3]  Select bots
+                          1 ... Righthand
+                          2 ... Tremaux
+                          3 ... Gaston
+    -h --help             Show this help message
+    -g --graphic          Display the way of the bot as list of coordinates
+    -v --version          Show the version
 )";
 
 /** version string */
@@ -52,16 +57,20 @@ int main(int argc, char* argv[]) {
       {"version", no_argument, 0, 'v'},
       {"help", no_argument, 0, 'h'},
       {"graphic", no_argument, 0, 'g'},
+      {"bot", required_argument, 0, 't'},
       {0, 0, 0, 0},
   };
+  bool graphic = true;
+  bool right = false;
+  bool tremaux = false;
+  bool gaston = false;
   int index;
   int iarg = 0;
-  bool graphic = false;
 
   opterr = 1;
   /** get all option parameters */
   while (iarg != -1) {
-    iarg = getopt_long(argc, argv, "vhg", longopts, &index);
+    iarg = getopt_long(argc, argv, "vhgt:", longopts, &index);
     switch (iarg) {
       case 'h':
         /** help - print the usage and exit */
@@ -77,7 +86,24 @@ int main(int argc, char* argv[]) {
 
       case 'g':
         /** graphical output flag */
-        graphic = true;
+        graphic = false;
+        break;
+
+      case 't':
+        /** graphical output flag */
+        switch (stoi((std::string) optarg)) {
+            case 1:
+                right = true;
+                break;
+            case 2:
+                tremaux = true;
+                break;
+            case 3:
+                gaston = true;
+                break;
+            default:
+                break;
+        }
         break;
     }
   }
@@ -92,10 +118,17 @@ int main(int argc, char* argv[]) {
   }
   /** close the file */
   file.close();
+  if (!(right + tremaux + gaston)) {
+    right = true;
+  }
+  std::cout << right << tremaux << gaston << std::endl;
   /** ptr to solver object with path to maze and graphic option */
-  auto solver = std::make_shared<Solver>(std::string(argv[argc - 1]), graphic);
+  auto solver = std::make_shared<Solver>(std::string(argv[argc - 1]), right, tremaux, gaston, graphic);
+  /** print the maze */
   solver->print_maze();
+  /** solve */
   solver->solve();
+  /** print the results */
   solver->print_result();
   return 0;
 }

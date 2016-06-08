@@ -35,6 +35,8 @@ Bot::Bot(const std::shared_ptr<Labyrinth> maze, std::string name)
   }
 }
 
+Bot::~Bot(){};
+
 void Bot::find_exit() {
   /** exit of the maze */
   position exit = this->maze->get_exit();

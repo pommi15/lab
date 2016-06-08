@@ -13,12 +13,16 @@
 #include "namegen.h"
 #include "import.h"
 Namegen::Namegen() {
+  /** importer to get files line by line as vector */
   auto import = std::make_shared<Import>();
+  /** get the names */
   this->botnames = import->convert("botdata/botnames.txt");
+  /** get the origins */
   this->botorigins = import->convert("botdata/botorigin.txt");
+  /** get the adjectives */
   this->botadjectives = import->convert("botdata/botadjectives.txt");
 }
-
+/** get a random name */
 std::string Namegen::get_name() const {
   std::random_device rd;
   std::mt19937 gen(rd());
